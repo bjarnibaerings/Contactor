@@ -3,10 +3,12 @@ import { View, Text, TouchableHighlight, Image, TouchableOpacity, FlatList, Aler
 import style from "./styles";
 
 const allContacts = ({ navigation: {navigate}}) => {
-    console.log("asdlkjqiowdjiopqwdkpoqwdkopqwkd")
+    console.log("asdlkjqiowdjiopqwdkpoqwdkopqwk")
     return(
         <View>
-        <Text>Hi ho</Text>
+            <Text>Hi ho</Text>
         </View>
     )
 };
+
+export default allContacts;

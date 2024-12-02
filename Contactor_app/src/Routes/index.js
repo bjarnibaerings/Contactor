@@ -4,9 +4,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-import allContacts from "allContactsScreen"
-import chosenContact from "chosenContactScreen"
-import newContact from "createNewContactScreen"
+import allContacts from "../View/allContactsScreen.js"
+import chosenContact from "../View/chosenContactScreen.js"
+import newContact from "../View/createNewContactScreen.js"
 
 const Routes = () => (
     <NavigationContainer>
