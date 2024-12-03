@@ -8,22 +8,24 @@ import * as fileService from "../../Services/fileServices"
 const allContacts = ({ navigation: {navigate}}) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
+    const [unFilteredContacts,setUnFilteredContacts] = useState([]);
 
-    const filterContacts = () =>{
-        const filteredContacts = contactDirectory.filter((contact,index, arr) =>{
-            if(contact.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1) {
-                arr.splice(index, 1);
-                return true;
-            }
-            return false;
-        });
-        setContacts(filteredContacts)
+    const filterContacts = (input) => {
+        if (input === "") {
+            // If input is empty reset to unfilteredlist
+            setContacts(unFilteredContacts);
+            return;
+        }
+        const filteredContacts = contactDirectory.filter(contact =>
+            contact.name.toLowerCase().includes(input.toLowerCase())
+        );
+        setContacts(filteredContacts);
     };
 
     const updateSearch = input => {
         setinput(input);
         console.log(input);
-        filterContacts();
+        filterContacts(input);
     }
 
 
@@ -40,6 +42,7 @@ const allContacts = ({ navigation: {navigate}}) => {
         (async () => {
             const contacts = await fileService.getAllContacts();
             setContacts(contacts);
+            setUnFilteredContacts(contacts);
         })();
     }, []);
     console.log("All contacts:", contactDirectory);
