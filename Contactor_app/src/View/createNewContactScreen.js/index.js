@@ -7,3 +7,5 @@ import style from "./styles";
 const newContact = ({ navigation: {navigate}}) => {
 
 };
+
+export default newContact;
