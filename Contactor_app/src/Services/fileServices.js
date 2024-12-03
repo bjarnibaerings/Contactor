@@ -76,8 +76,7 @@ export const copyFile = async (file, newLocation) => {
     }));
 }
 /*Todo:
-    getAllContacts
-    getAllImages
+    getAllImages (?)
     addImage
     loadImage
     addContact
