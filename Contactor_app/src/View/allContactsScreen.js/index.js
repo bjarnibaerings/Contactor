@@ -6,9 +6,14 @@ const allContacts = ({ navigation: {navigate}}) => {
     console.log("asdlkjqiowdjiopqwdkpoqwdkopqwk")
     return(
         <View>
-            <Text>Hi ho</Text>
+        <TouchableOpacity onPress={() => navigate("createNewContactsScreen")}>
+            <Text style = {style.Button}>Create New Screen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigate("chosenContactScreen")}>
+            <Text style = {style.Button}>Chosen Contact Screen</Text>
+        </TouchableOpacity>
         </View>
     )
 };
-
+// KILL ME
 export default allContacts;
