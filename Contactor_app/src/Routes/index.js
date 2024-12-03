@@ -11,8 +11,8 @@ import newContact from "../View/createNewContactScreen.js"
 const Routes = () => (
     <NavigationContainer>
         <Stack.Navigator initialRouteName="allContactsScreen">
-            <Stack.Screen name="allContactScreen" component={allContacts} />
-            <Stack.Screen name="allContactScreen" component={chosenContact} />
+            <Stack.Screen name="allContactsScreen" component={allContacts} />
+            <Stack.Screen name="chosenContactScreen" component={chosenContact} />
             <Stack.Screen name="createNewContactsScreen" component={newContact} />
         </Stack.Navigator>
     </NavigationContainer>
