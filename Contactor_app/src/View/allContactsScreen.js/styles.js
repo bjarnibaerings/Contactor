@@ -4,6 +4,18 @@ import { StyleSheet, Dimensions } from "react-native";
 const {Width: WinWidth} = Dimensions.get("window");
 
 export default StyleSheet.create({
+    Container:{
+        flex: 1,
+        padding: 20,
+        flexDirection: "column",
+        alignSelf: "center"
+    },
+    ImageContainer:{
+        width:100,
+        height:100,
+        resizeMode: "cover",
+        borderRadius: 40
+    },
     Button:{
         paddingTop: 10,
         paddingBottom: 10,
@@ -15,5 +27,23 @@ export default StyleSheet.create({
         shadowColor: "black",
         shadowOffset: {height: 10, width: 10},
         shadowOpacity: 0.3
+    },
+    ButtonContainer:{
+        alignSelf: "center",
+        marginBottom:10
+    },
+    boarderContainer:{
+        flex: 1,
+        padding: 20,
+        flexDirection: "row"
+    },
+    titleName:{
+        fontSize:20,
+        marginTop: 40,
+        marginLeft: 20
+    },
+    textInput: {
+        borderWidth: 2,
+        borderColor: "black"
     }
 });
