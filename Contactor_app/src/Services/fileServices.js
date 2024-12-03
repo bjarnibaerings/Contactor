@@ -1,5 +1,5 @@
 import * as fileSystem from "expo-file-system"
-const contactDirectory = "${FileSystem.documentDirectory}contacts";
+const contactDirectory = `${fileSystem.documentDirectory}contacts`;
 
 // Error handaling
 const onException = (cb, errorHandler) => {
@@ -18,18 +18,19 @@ Directory
 */
 // Clean
 export const cleanDirectory = async () => {
-    await FileSystem.deleteAsync(contactDirectory);
+    await fileSystem.deleteAsync(contactDirectory);
 }
 
 // Setup Directory
 const setupDirectory = async () => {
-    const dir = await FileSystem.getInfoAsync(contactDirectory);
+    const dir = await fileSystem.getInfoAsync(contactDirectory);
     if (!dir.exists) {
-        await FileSystem.makeDirectoryAsync(contactDirectory);
+        await fileSystem.makeDirectoryAsync(contactDirectory);
     }
 }
+
 export const remove = async name => {
-    return await onException(() => FileSystem.deleteAsync(`${contactDirectory}/${name}`, { idempotent: true }));
+    return await onException(() => fileSystem.deleteAsync(`${contactDirectory}/${name}`, { idempotent: true }));
 }
 
 /*
@@ -48,20 +49,20 @@ export const addContact = async (contactInformation) =>{
 
 export const getAllContacts = async () => {
     try {
+        await setupDirectory();
       // Read all files in the contacts directory
-      const files = await FileSystem.readDirectoryAsync(contactDirectory);
+      const files = await fileSystem.readDirectoryAsync(contactDirectory);
   
       // Read each files content and add it to a list
       const contacts = [];
       for (const file of files) {
         const fileUri = contactDirectory + "/" + file;
-        const fileContents = await FileSystem.readAsStringAsync(fileUri);
+        const fileContents = await fileSystem.readAsStringAsync(fileUri);
         //reverse JSON.stringify
         const contact = JSON.parse(fileContents);
         contacts.push(contact);
       }
-  
-      console.log("All contacts:", contacts);
+      return contacts
     } catch (error) {
       console.error("Error getting contacts:", error);
     }
@@ -70,7 +71,7 @@ export const getAllContacts = async () => {
 
 // Copy 
 export const copyFile = async (file, newLocation) => {
-    return await onException(() => FileSystem.copyAsync({
+    return await onException(() => fileSystem.copyAsync({
         from: file,
         to: newLocation
     }));
