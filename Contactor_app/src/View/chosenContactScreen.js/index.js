@@ -5,3 +5,5 @@ import style from "./styles";
 const chosenContact = ({ navigation: {navigate}}) => {
 
 };
+
+export default chosenContact;
