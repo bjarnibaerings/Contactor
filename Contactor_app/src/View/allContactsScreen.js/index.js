@@ -15,5 +15,5 @@ const allContacts = ({ navigation: {navigate}}) => {
         </View>
     )
 };
-
+// KILL ME
 export default allContacts;
