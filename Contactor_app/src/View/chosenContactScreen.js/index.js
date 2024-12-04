@@ -4,8 +4,8 @@ import style from "./styles";
 
 //Manwin
 
-const chosenContact = ({ navigation: {navigate}}) => {
+const ChosenContact = ({ navigation: {navigate}}) => {
 
 };
 
-export default chosenContact;
+export default ChosenContact;

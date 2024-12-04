@@ -5,7 +5,7 @@ import * as fileService from "../../Services/fileServices"
 
 //Bjarni
 
-const allContacts = ({ navigation: {navigate}}) => {
+const AllContacts = ({ navigation: {navigate}}) => {
     const [contactDirectory, setContacts] = useState([])
 
     useEffect(() => {
@@ -28,4 +28,4 @@ const allContacts = ({ navigation: {navigate}}) => {
     )
 };
 // KILL ME
-export default allContacts;
+export default AllContacts;
