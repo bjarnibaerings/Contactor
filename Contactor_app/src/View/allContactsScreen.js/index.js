@@ -5,7 +5,7 @@ import * as fileService from "../../Services/fileServices"
 
 //Bjarni
 
-const AllContacts = ({ navigation: {navigate}}) => {
+const AllContacts = ({ navigation }) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
@@ -52,9 +52,7 @@ const AllContacts = ({ navigation: {navigate}}) => {
             <Text style = {styles.Button}>Create New Screen</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity onPress={() => navigate("chosenContactScreen")}>
-            <Text style = {styles.Button}> press me </Text>
-        </TouchableOpacity>
+
 
         <Text>Search:</Text>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
@@ -62,13 +60,13 @@ const AllContacts = ({ navigation: {navigate}}) => {
             <FlatList
             data={contactDirectory}
             keyExtractor={item => item.id}
-            renderItem={({item: {id, image, name}}) => {
+            renderItem={({item}) => { //took away deconstruction so i can pass item
                 return(
-                <View key={id} style={styles.boarderContainer}>
-                    <TouchableOpacity onPress={() => navigate("chosenContactScreen")}>
-                        <Image style={styles.ImageContainer} source={{uri:image}}/>
+                <View key={item.id} style={styles.boarderContainer}>
+                    <TouchableOpacity onPress={() => navigation.navigate("chosenContactScreen", {contact: item})}>
+                        <Image style={styles.ImageContainer} source={{uri:item.image}}/>
                     </TouchableOpacity>
-                    <Text style={styles.titleName}>{name}</Text>
+                    <Text style={styles.titleName}>{item.name}</Text>
                     </View>
                 )
             }}/>
