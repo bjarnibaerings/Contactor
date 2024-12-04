@@ -49,6 +49,6 @@ export default StyleSheet.create({
         backgroundColor: "aliceblue"
     },
     listContainer: {
-        minHeight: 650
+        maxHeight: 670
     }
 });
