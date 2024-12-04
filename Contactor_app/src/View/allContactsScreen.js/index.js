@@ -16,7 +16,7 @@ const allContacts = ({ navigation: {navigate}}) => {
             setContacts(unFilteredContacts);
             return;
         }
-        const filteredContacts = contactDirectory.filter(contact =>
+        const filteredContacts = unFilteredContacts.filter(contact =>
             contact.name.toLowerCase().includes(input.toLowerCase())
         );
         setContacts(filteredContacts);
