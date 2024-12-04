@@ -11,17 +11,27 @@ const allContacts = ({ navigation: {navigate}}) => {
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
 
+
+    const sortDirectory = () =>{
+        const sortedDirectory = contactDirectory.sort((a,b) => 
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+        setContacts(sortedDirectory)
+    }
+
     const filterContacts = (input) => {
         if (input === "") {
             // If input is empty reset to unfilteredlist
             setContacts(unFilteredContacts);
+            sortDirectory()
             return;
         }
         const filteredContacts = unFilteredContacts.filter(contact =>
             contact.name.toLowerCase().includes(input.toLowerCase())
         );
         setContacts(filteredContacts);
+        sortDirectory()
     };
+
 
     const updateSearch = input => {
         setinput(input);
@@ -29,13 +39,14 @@ const allContacts = ({ navigation: {navigate}}) => {
     }
 
 
-    const addJohn = () =>{
-        const newId = "8935135"
-        const newName = "Bob"
-        const newNumber = "521-5647"
-        const newImage = "https://t3.ftcdn.net/jpg/02/22/85/16/360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg"
-        const newJhon ={id: newId, name: newName, number: newNumber, image:newImage};
-        fileService.addContact(newJhon)
+    const addPerson = (contactData) =>{
+        const newId = contactData.id
+        const newName = contactData.firstName
+        const newNumber = contactData.phoneNumbers[0].number
+        const newImage = contactData.imageAvailable
+        const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
+        fileService.addContact(newPerson)
+        sortDirectory()
     }
 
     useEffect(() => {
@@ -47,8 +58,10 @@ const allContacts = ({ navigation: {navigate}}) => {
             if (status === "granted"){
                 const {data} = await phoneContacts.getContactsAsync();
                 if (data.length > 0){
-                    const contactData = data[5];
-                    console.log(contactData);
+                    for (i in data){
+                        const contactData = data[i]
+                        addPerson(contactData)
+                    }
                 }
             }
         })();
