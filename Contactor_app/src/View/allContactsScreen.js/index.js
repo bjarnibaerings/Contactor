@@ -11,16 +11,17 @@ const allContacts = ({ navigation: {navigate}}) => {
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
 
-
     const sortDirectory = () =>{
-        const sortedDirectory = contactDirectory.sort((a,b) => 
+        const sortedDirect = contactDirectory.sort((a,b) => 
         a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-        setContacts(sortedDirectory)
+        console.log(sortedDirect)
+        setContacts(sortedDirect)
+        console.log(contactDirectory)
     }
 
     const filterContacts = (input) => {
         if (input === "") {
-            // If input is empty reset to unfilteredlist
+            // If input is empty reset to unfilteredlis
             setContacts(unFilteredContacts);
             sortDirectory()
             return;
@@ -46,12 +47,12 @@ const allContacts = ({ navigation: {navigate}}) => {
         const newImage = contactData.imageAvailable
         const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
         fileService.addContact(newPerson)
-        sortDirectory()
     }
 
     useEffect(() => {
         (async () => {
             const contacts = await fileService.getAllContacts();
+            
             setContacts(contacts);
             setUnFilteredContacts(contacts);
             const {status} = await phoneContacts.requestPermissionsAsync();
@@ -62,6 +63,7 @@ const allContacts = ({ navigation: {navigate}}) => {
                         const contactData = data[i]
                         addPerson(contactData)
                     }
+                    sortDirectory()
                 }
             }
         })();
