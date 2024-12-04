@@ -24,7 +24,6 @@ const allContacts = ({ navigation: {navigate}}) => {
 
     const updateSearch = input => {
         setinput(input);
-        console.log(input);
         filterContacts(input);
     }
 
@@ -45,15 +44,13 @@ const allContacts = ({ navigation: {navigate}}) => {
             setUnFilteredContacts(contacts);
         })();
     }, []);
-    console.log("All contacts:", contactDirectory);
 
     return(
         <View>
         <TouchableOpacity onPress={() => navigate("createNewContactsScreen")}>
-            <Text style = {styles.Button}>Create New Screen</Text>
+            <Text style = {styles.Button}>Add New Contact</Text>
         </TouchableOpacity>
         
-        <Text>Search:</Text>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
         
             <FlatList

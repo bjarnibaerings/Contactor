@@ -44,6 +44,8 @@ export default StyleSheet.create({
     },
     textInput: {
         borderWidth: 2,
-        borderColor: "black"
+        borderColor: "black",
+        height: 30,
+        backgroundColor: "aliceblue"
     }
 });
