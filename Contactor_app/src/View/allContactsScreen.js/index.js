@@ -11,17 +11,28 @@ const AllContacts = ({ navigation: {navigate}}) => {
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
 
+    const sortDirectory = () =>{
+        const sortedDirect = contactDirectory.sort((a,b) => 
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+        console.log(sortedDirect)
+        setContacts(sortedDirect)
+        console.log(contactDirectory)
+    }
+
     const filterContacts = (input) => {
         if (input === "") {
-            // If input is empty reset to unfilteredlist
+            // If input is empty reset to unfilteredlis
             setContacts(unFilteredContacts);
+            sortDirectory()
             return;
         }
         const filteredContacts = unFilteredContacts.filter(contact =>
             contact.name.toLowerCase().includes(input.toLowerCase())
         );
         setContacts(filteredContacts);
+        sortDirectory()
     };
+
 
     const updateSearch = input => {
         setinput(input);
@@ -29,26 +40,30 @@ const AllContacts = ({ navigation: {navigate}}) => {
     }
 
 
-    const addJohn = () =>{
-        const newId = "8935135"
-        const newName = "Bob"
-        const newNumber = "521-5647"
-        const newImage = "https://t3.ftcdn.net/jpg/02/22/85/16/360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg"
-        const newJhon ={id: newId, name: newName, number: newNumber, image:newImage};
-        fileService.addContact(newJhon)
+    const addPerson = (contactData) =>{
+        const newId = contactData.id
+        const newName = contactData.firstName
+        const newNumber = contactData.phoneNumbers[0].number
+        const newImage = contactData.imageAvailable
+        const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
+        fileService.addContact(newPerson)
     }
 
     useEffect(() => {
         (async () => {
             const contacts = await fileService.getAllContacts();
+            
             setContacts(contacts);
             setUnFilteredContacts(contacts);
             const {status} = await phoneContacts.requestPermissionsAsync();
             if (status === "granted"){
                 const {data} = await phoneContacts.getContactsAsync();
                 if (data.length > 0){
-                    const contactData = data[0];
-                    console.log(contactData);
+                    for (i in data){
+                        const contactData = data[i]
+                        addPerson(contactData)
+                    }
+                    sortDirectory()
                 }
             }
         })();
@@ -56,13 +71,10 @@ const AllContacts = ({ navigation: {navigate}}) => {
 
     return(
         <View>
-        <TouchableOpacity onPress={() => navigate("createNewContactsScreen")}>
-            <Text style = {styles.Button}>Add New Contact</Text>
-        </TouchableOpacity>
-        
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
         
             <FlatList
+            style= {styles.listContainer}
             data={contactDirectory}
             keyExtractor={item => item.id}
             renderItem={({item: {id, image, name}}) => {
@@ -75,6 +87,9 @@ const AllContacts = ({ navigation: {navigate}}) => {
                 </View>
                 )
             }}/>
+        <TouchableOpacity style = {styles.ButtonContainer} onPress={() => navigate("createNewContactsScreen")}>
+            <Text style = {styles.Button}>Add New Contact</Text>
+        </TouchableOpacity>
         </View>
     )
 };
