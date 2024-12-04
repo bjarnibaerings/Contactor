@@ -4,8 +4,8 @@ import style from "./styles";
 
 //Telma
 
-const newContact = ({ navigation: {navigate}}) => {
+const NewContact = ({ navigation: {navigate}}) => {
 
 };
 
-export default newContact;
+export default NewContact;

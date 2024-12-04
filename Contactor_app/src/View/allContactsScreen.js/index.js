@@ -5,11 +5,11 @@ import * as fileService from "../../Services/fileServices"
 
 //Bjarni
 
-const allContacts = ({ navigation: {navigate}}) => {
+const AllContacts = ({ navigation: {navigate}}) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
-
+    
     const filterContacts = (input) => {
         if (input === "") {
             // If input is empty reset to unfilteredlist
@@ -27,7 +27,6 @@ const allContacts = ({ navigation: {navigate}}) => {
         console.log(input);
         filterContacts(input);
     }
-
 
     const addJohn = () =>{
         const newId = "8935135"
@@ -53,6 +52,10 @@ const allContacts = ({ navigation: {navigate}}) => {
             <Text style = {styles.Button}>Create New Screen</Text>
         </TouchableOpacity>
         
+        <TouchableOpacity onPress={() => navigate("chosenContactScreen")}>
+            <Text style = {styles.Button}> press me </Text>
+        </TouchableOpacity>
+
         <Text>Search:</Text>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
         
@@ -62,15 +65,15 @@ const allContacts = ({ navigation: {navigate}}) => {
             renderItem={({item: {id, image, name}}) => {
                 return(
                 <View key={id} style={styles.boarderContainer}>
-                <TouchableOpacity onPress={() => navigate("chosenContactScreen")}>
-                <Image style={styles.ImageContainer} source={{uri:image}}/>
-                </TouchableOpacity>
-                <Text style={styles.titleName}>{name}</Text>
-                </View>
+                    <TouchableOpacity onPress={() => navigate("chosenContactScreen")}>
+                        <Image style={styles.ImageContainer} source={{uri:image}}/>
+                    </TouchableOpacity>
+                    <Text style={styles.titleName}>{name}</Text>
+                    </View>
                 )
             }}/>
         </View>
     )
 };
 // KILL ME
-export default allContacts;
+export default AllContacts;

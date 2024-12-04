@@ -8,17 +8,16 @@ import EditContactModal from "../../Component/editContactModal";
 
 
 
-const chosenContact = ({ navigation: {navigate}}) => {
+const ChosenContact = ({ navigation: {navigate}}) => {
     const [isEditModalVisible, setEditModalVisible] = useState(false)
 
     const toggleEditModal = () => {
         setEditModalVisible(!isEditModalVisible);
     }
 
-
-
     const handleImagePress = () => {
         Alert.alert("Image clicked!");
+        // will be changed to expanding the image when we have free time
       };
 
 
@@ -26,11 +25,10 @@ const chosenContact = ({ navigation: {navigate}}) => {
         <View style = {styles.container}>
             <View style = {styles.information}>
                 <View style = {styles.imageContainer}>
-                    <TouchableOpacity onPress={handleImagePress} style={styles.contactImageContainer}>
-                        <Image source={{ uri: "" }} style={styles.contactImage}/>
+                    <TouchableOpacity onPress={handleImagePress}>
+                        <Image source={{ uri: "https://t3.ftcdn.net/jpg/02/22/85/16/360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg" }} style={styles.contactImage}/>
                     </TouchableOpacity>
                 </View>
-            
                 <Text>This should be the name:</Text>
                 <Text>This should be the phone number:</Text>
                 <Text>SHOULD BE ABLE TO EDIT THIS PROFILE</Text>
@@ -45,4 +43,4 @@ const chosenContact = ({ navigation: {navigate}}) => {
     )
 };
 
-export default chosenContact;
+export default ChosenContact;
