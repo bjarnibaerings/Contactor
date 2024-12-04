@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, TouchableHighlight, Image, TouchableOpacity, FlatList, Alert, TextInput } from "react-native";
 import styles from "./styles";
-import * as fileService from "../../Services/fileServices"
+import * as fileService from "../../Services/fileServices";
+import * as phoneContacts from "expo-contacts";
 
 //Bjarni
 
@@ -42,6 +43,14 @@ const allContacts = ({ navigation: {navigate}}) => {
             const contacts = await fileService.getAllContacts();
             setContacts(contacts);
             setUnFilteredContacts(contacts);
+            const {status} = await phoneContacts.requestPermissionsAsync();
+            if (status === "granted"){
+                const {data} = await phoneContacts.getContactsAsync();
+                if (data.length > 0){
+                    const contactData = data[0];
+                    console.log(contactData);
+                }
+            }
         })();
     }, []);
 
