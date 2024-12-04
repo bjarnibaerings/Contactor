@@ -42,9 +42,16 @@ Contacts
 */
 //Add a new contact
 export const addContact = async (contactInformation) =>{
-    const fileUri = contactDirectory +"/"+contactInformation.name + "-" + contactInformation.id +".json";
+    await setupDirectory();
+    const fileUri = `${contactDirectory}/${contactInformation.name}-${contactInformation.id}.json`;
     const jsonContents = JSON.stringify(contactInformation);
-    fileSystem.writeAsStringAsync(fileUri,jsonContents);
+
+    try {
+        await fileSystem.writeAsStringAsync(fileUri, jsonContents);
+    } catch (error) {
+        console.log("Error saving contact:", error);
+        throw error;
+    }
 }
 
 export const getAllContacts = async () => {
@@ -76,16 +83,3 @@ export const copyFile = async (file, newLocation) => {
         to: newLocation
     }));
 }
-/*Todo:
-    getAllImages (?)
-    addImage
-    loadImage
-    addContact
-    loadContact
-
-    updateContact
-        updateImage
-    deleteContact
-    deleteImage
-
-*/

@@ -45,4 +45,4 @@ const chosenContact = ({ navigation: {navigate}}) => {
     )
 };
 
-export default ChosenContact;
+export default chosenContact;

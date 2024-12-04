@@ -3,6 +3,11 @@ import { StyleSheet, Dimensions } from "react-native";
 const {Width: WinWidth} = Dimensions.get("window");
 
 const styles = StyleSheet.create({
+    modal: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
     container:{
         paddingHorizontal: 18,
         backgroundColor: 'white'
