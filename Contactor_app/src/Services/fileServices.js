@@ -29,8 +29,9 @@ const setupDirectory = async () => {
     }
 }
 
-export const remove = async name => {
-    return await onException(() => fileSystem.deleteAsync(`${contactDirectory}/${name}`, { idempotent: true }));
+export const remove = async (contactRemove) => {
+    // { idempotent: true } This means you wont get an erro if you try to delete something that does not exists
+    return await onException(() => fileSystem.deleteAsync(contactDirectory + "/" + "-" + contactRemove.id +".json", { idempotent: true }));
 }
 
 /*

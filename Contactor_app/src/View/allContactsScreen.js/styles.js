@@ -30,7 +30,7 @@ export default StyleSheet.create({
     },
     ButtonContainer:{
         alignSelf: "center",
-        marginBottom:10
+        marginBottom: 10
     },
     boarderContainer:{
         flex: 1,
@@ -47,5 +47,8 @@ export default StyleSheet.create({
         borderColor: "black",
         height: 30,
         backgroundColor: "aliceblue"
+    },
+    listContainer: {
+        minHeight: 650
     }
 });

@@ -56,13 +56,10 @@ const allContacts = ({ navigation: {navigate}}) => {
 
     return(
         <View>
-        <TouchableOpacity onPress={() => navigate("createNewContactsScreen")}>
-            <Text style = {styles.Button}>Add New Contact</Text>
-        </TouchableOpacity>
-        
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
         
             <FlatList
+            style= {styles.listContainer}
             data={contactDirectory}
             keyExtractor={item => item.id}
             renderItem={({item: {id, image, name}}) => {
@@ -75,6 +72,9 @@ const allContacts = ({ navigation: {navigate}}) => {
                 </View>
                 )
             }}/>
+        <TouchableOpacity style = {styles.ButtonContainer} onPress={() => navigate("createNewContactsScreen")}>
+            <Text style = {styles.Button}>Add New Contact</Text>
+        </TouchableOpacity>
         </View>
     )
 };
