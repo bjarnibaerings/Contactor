@@ -22,19 +22,20 @@ const NewContact = ({ route, navigation: {navigate}}) => {
         }
       
         const newContact = {
-          id: contactName.length ? Math.max(...contactName.map(contact => contact.id)) + 1 : 1,
+          id: Date.now(),
           name: contactName,
           phoneNumber: contactPhoneNumber,
           image: contactImage,
         };
       
         try {
-          await addContact(newContact);
-          Alert.alert("Success", "Contact saved successfully.");
-          setIsModalOpen(false);
-          setContactName("");
-          setContactPhoneNumber("");
-          setContactImage(null);
+        console.log("Saving contact", newContact);
+        await addContact(newContact);
+        Alert.alert("Success", "Contact saved successfully.");
+        closeModal();
+        setContactName("");
+        setContactPhoneNumber("");
+        setContactImage(null);
         } catch (error) {
           Alert.alert("Error", "Failed to save contact.");
         }

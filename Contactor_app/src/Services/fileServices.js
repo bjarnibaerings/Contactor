@@ -43,8 +43,9 @@ Contacts
 //Add a new contact
 export const addContact = async (contactInformation) =>{
     await setupDirectory();
-    const fileUri = `${contactDirectory}/${contactInformation.name}-${contactInformation.id}.json`;
+    const fileUri = contactDirectory +"/"+contactInformation.name + "-" + contactInformation.id +".json";
     const jsonContents = JSON.stringify(contactInformation);
+    console.log("We made it here")
 
     try {
         await fileSystem.writeAsStringAsync(fileUri, jsonContents);
