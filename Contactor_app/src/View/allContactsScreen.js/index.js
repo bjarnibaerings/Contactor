@@ -10,18 +10,18 @@ const allContacts = ({ navigation: {navigate}}) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
+    const [useEffectCalled,setUseEffectCalled] = useState([]);
 
     const sortDirectory = () =>{
         const sortedDirect = contactDirectory.sort((a,b) => 
         a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
         console.log(sortedDirect)
         setContacts(sortedDirect)
-        console.log(contactDirectory)
     }
 
     const filterContacts = (input) => {
         if (input === "") {
-            // If input is empty reset to unfilteredlis
+            // If input is empty reset to unfilteredlisf
             setContacts(unFilteredContacts);
             sortDirectory()
             return;
@@ -57,8 +57,10 @@ const allContacts = ({ navigation: {navigate}}) => {
             setUnFilteredContacts(contacts);
             const {status} = await phoneContacts.requestPermissionsAsync();
             if (status === "granted"){
+                
                 const {data} = await phoneContacts.getContactsAsync();
                 if (data.length > 0){
+                    
                     for (i in data){
                         const contactData = data[i]
                         addPerson(contactData)
@@ -67,14 +69,14 @@ const allContacts = ({ navigation: {navigate}}) => {
                 }
             }
         })();
-    }, []);
+    }, [useEffectCalled,setUseEffectCalled]);
 
     return(
         <View>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
         
             <FlatList
-            style= {styles.listContainer}
+            style={styles.listContainer}
             data={contactDirectory}
             keyExtractor={item => item.id}
             renderItem={({item: {id, image, name}}) => {
