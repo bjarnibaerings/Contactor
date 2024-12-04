@@ -47,7 +47,7 @@ const allContacts = ({ navigation: {navigate}}) => {
             if (status === "granted"){
                 const {data} = await phoneContacts.getContactsAsync();
                 if (data.length > 0){
-                    const contactData = data[0];
+                    const contactData = data[5];
                     console.log(contactData);
                 }
             }
