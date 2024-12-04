@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, TouchableHighlight, Image, TouchableOpacity, FlatList, Alert, TextInput } from "react-native";
 import styles from "./styles";
-import * as fileService from "../../Services/fileServices"
+import * as fileService from "../../Services/fileServices";
+import * as phoneContacts from "expo-contacts";
 
 //Bjarni
 
@@ -24,7 +25,6 @@ const allContacts = ({ navigation: {navigate}}) => {
 
     const updateSearch = input => {
         setinput(input);
-        console.log(input);
         filterContacts(input);
     }
 
@@ -43,17 +43,23 @@ const allContacts = ({ navigation: {navigate}}) => {
             const contacts = await fileService.getAllContacts();
             setContacts(contacts);
             setUnFilteredContacts(contacts);
+            const {status} = await phoneContacts.requestPermissionsAsync();
+            if (status === "granted"){
+                const {data} = await phoneContacts.getContactsAsync();
+                if (data.length > 0){
+                    const contactData = data[0];
+                    console.log(contactData);
+                }
+            }
         })();
     }, []);
-    console.log("All contacts:", contactDirectory);
 
     return(
         <View>
         <TouchableOpacity onPress={() => navigate("createNewContactsScreen")}>
-            <Text style = {styles.Button}>Create New Screen</Text>
+            <Text style = {styles.Button}>Add New Contact</Text>
         </TouchableOpacity>
         
-        <Text>Search:</Text>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
         
             <FlatList
