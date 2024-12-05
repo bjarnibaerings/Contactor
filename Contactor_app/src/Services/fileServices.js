@@ -48,7 +48,14 @@ export const addContact = async (contactInformation) =>{
     }
     const fileUri = contactDirectory +"/"+contactInformation.name + "-" + contactInformation.id +".json";
     const jsonContents = JSON.stringify(contactInformation);
-    fileSystem.writeAsStringAsync(fileUri,jsonContents);
+    console.log("We made it here")
+
+    try {
+        await fileSystem.writeAsStringAsync(fileUri, jsonContents);
+    } catch (error) {
+        console.log("Error saving contact:", error);
+        throw error;
+    }
 }
 
 export const getAllContacts = async () => {

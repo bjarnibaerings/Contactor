@@ -6,7 +6,7 @@ import * as phoneContacts from "expo-contacts";
 
 //Bjarni
 
-const AllContacts = ({ navigation }) => {
+const AllContacts = ({ navigation: {navigate}}) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
@@ -52,7 +52,7 @@ const AllContacts = ({ navigation }) => {
     useEffect(() => {
         (async () => {
             const contacts = await fileService.getAllContacts();
-            
+            console.log("Fuck This", contacts)
             setContacts(contacts);
             setUnFilteredContacts(contacts);
             // Ask permission for getting contacts
