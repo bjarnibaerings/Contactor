@@ -51,7 +51,6 @@ const ChosenContact = ({ route, navigation}) => {
             <Button title="Edit Profile" onPress={toggleEditModal} style={styles.editButton} />
             <EditContactModal visible={isEditModalVisible} onClose={toggleEditModal} contact={currentContact} onSave={editContact} />
         </View>
-        
     )
 };
 
