@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
+import { useFocusEffect } from "@react-navigation/native"
 import { View, Text, TouchableHighlight, Image, TouchableOpacity, FlatList, Alert, TextInput } from "react-native";
 import styles from "./styles";
 import * as fileService from "../../Services/fileServices";
@@ -10,20 +11,13 @@ const AllContacts = ({ navigation }) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
-    const [useEffectCalled,setUseEffectCalled] = useState([]);
 
-    const sortDirectory = () =>{
-        const sortedDirect = [...contactDirectory].sort((a,b) => 
-        a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-        setContacts(sortedDirect)
-        
-    }
+
 
     const filterContacts = (input) => {
         if (input === " " || input === null) {
             // If input is empty reset to unfilteredlisf
             setContacts(unFilteredContacts);
-            sortDirectory()
             return;
         }
         const filteredContacts = [...unFilteredContacts].filter(contact =>
@@ -48,32 +42,33 @@ const AllContacts = ({ navigation }) => {
         const newImage = contactData.imageAvailable
         const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
         fileService.addContact(newPerson)
-        console.log(newPerson)
     }
 
-    useEffect(() => {
-        (async () => {
-            const contacts = await fileService.getAllContacts();
-            
-            setContacts(contacts);
-            setUnFilteredContacts(contacts);
-            const {status} = await phoneContacts.requestPermissionsAsync();
-            if (status === "granted"){
-                
-                const {data} = await phoneContacts.getContactsAsync();
-                if (data.length > 0){
-                    
-                    for (i in data){
-                        const contactData = data[i]
-                        addPerson(contactData)
-                    }
-                    console.log("fsghsgofahghfdkghfkjlghfdklghskflgh")
-                    sortDirectory()
+    const fetchContacts = async () => {
+        
+
+        const contacts = await fileService.getAllContacts();
+        setContacts(contacts);
+        setUnFilteredContacts(contacts);
+
+        const { status } = await phoneContacts.requestPermissionsAsync();
+        if (status === "granted") {
+            const { data } = await phoneContacts.getContactsAsync();
+            if (data.length > 0) {
+                for (let i = 0; i < data.length; i++) {
+                    const contactData = data[i];
+                    addPerson(contactData);
                 }
             }
-        })();
-    }, [useEffectCalled,setUseEffectCalled]);
-
+        }
+    };
+    
+    //using use focus effect for refresh
+    useFocusEffect(
+        useCallback(() => {
+            fetchContacts();
+        }, [])
+    )
     return(
         <View>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>

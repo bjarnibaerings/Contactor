@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Button, TouchableHighlight, Image, TouchableOpacity, FlatList, Alert } from "react-native";
 import styles from "./styles";
 import EditContactModal from "../../Component/editContactModal";
-
-//Manwin
-
-
+import { addContact, remove } from "../../Services/fileServices";
 
 const ChosenContact = ({ route, navigation}) => {
     const { contact } = route.params;
@@ -22,14 +19,19 @@ const ChosenContact = ({ route, navigation}) => {
       };
 
     //function to change name or number: 
-    const editContact = (updateContact) =>{
-        setCurrentContact(updateContact);
+    const editContact = async (updateContact) =>{
+        console.log(updateContact)
+        try{
+            await remove(contact);
+            await addContact(updateContact);
+            setCurrentContact(updateContact);
+            
 
-    }
-
-    //functions for images:
-    const selectFromCameraRoll = async () => {
-        const photo = await imageService.selectFromCameraRoll()
+        } catch (error) {
+            console.error("Error updating contact:", error);
+            Alert.alert("Error", "Failed to update contact.");
+        }
+        
     }
     
     return (
@@ -48,8 +50,12 @@ const ChosenContact = ({ route, navigation}) => {
             <Text>!!!As a result of modifying the contact the JSON file associated
             with this contact should be recreated with the new information!!! name, phoneNumber and photo (how the data should look like)</Text>
             <Text>So basically we are deleting and recreating? </Text>
+            <Button title="Remove" onPress={async () => {
+                    await remove(currentContact);
+                    Alert.alert("Contact Removed", `${currentContact.name} has been successfully removed.`);
+                    navigation.goBack(); }}/>
             <Button title="Edit Profile" onPress={toggleEditModal} style={styles.editButton} />
-            <EditContactModal visible={isEditModalVisible} onClose={toggleEditModal} contact={currentContact} onSave={editContact} />
+            <EditContactModal visible={isEditModalVisible} onClose={toggleEditModal} contact={currentContact} onSave={(updatedContact) => {editContact(updatedContact); toggleEditModal();}} />
         </View>
     )
 };
