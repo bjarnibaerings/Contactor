@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
+import { useFocusEffect } from "@react-navigation/native"
 import { View, Text, TouchableHighlight, Image, TouchableOpacity, FlatList, Alert, TextInput } from "react-native";
 import styles from "./styles";
 import * as fileService from "../../Services/fileServices";
@@ -10,14 +11,8 @@ const AllContacts = ({ navigation: {navigate}}) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
-    const [useEffectCalled,setUseEffectCalled] = useState([]);
 
-    const sortDirectory = () =>{
-        const sortedDirect = [...contactDirectory].sort((a,b) => 
-        a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-        setContacts(sortedDirect)
-        
-    }
+
 
     const filterContacts = (input) => {
         if (input === " " || input === null) {
@@ -49,30 +44,31 @@ const AllContacts = ({ navigation: {navigate}}) => {
         fileService.addContact(newPerson)
     }
 
-    useEffect(() => {
-        (async () => {
-            const contacts = await fileService.getAllContacts();
-            console.log("Fuck This", contacts)
-            setContacts(contacts);
-            setUnFilteredContacts(contacts);
-            // Ask permission for getting contacts
-            const {status} = await phoneContacts.requestPermissionsAsync();
-            if (status === "granted"){
-                
-                const {data} = await phoneContacts.getContactsAsync();
-                if (data.length > 0){
-                    
-                    for (i in data){
-                        const contactData = data[i]
-                        addPerson(contactData)
-                    }
+    const fetchContacts = async () => {
+        
+
+        const contacts = await fileService.getAllContacts();
+        setContacts(contacts);
+        setUnFilteredContacts(contacts);
+
+        const { status } = await phoneContacts.requestPermissionsAsync();
+        if (status === "granted") {
+            const { data } = await phoneContacts.getContactsAsync();
+            if (data.length > 0) {
+                for (let i = 0; i < data.length; i++) {
+                    const contactData = data[i];
+                    addPerson(contactData);
                 }
             }
-            // SORT SHOULD BE BE HERE BUT WHEN I ADD ANY FUNCTION OR ANYTHING INCLUDING CONSOLE.LOG IT DOES NOT WORK WHYYYYYYY????
-            //updateSearch("")
-        })();
-    }, [useEffectCalled,setUseEffectCalled]);
-
+        }
+    };
+    
+    //using use focus effect for refresh
+    useFocusEffect(
+        useCallback(() => {
+            fetchContacts();
+        }, [])
+    )
     return(
         <View>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
