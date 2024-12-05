@@ -12,6 +12,7 @@ const AllContacts = ({ navigation }) => {
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
     const [useEffectCalled,setUseEffectCalled] = useState([]);
 
+    // this sorts the contactDirectory but it is currently not in use
     const sortDirectory = () =>{
         const sortedDirect = [...contactDirectory].sort((a,b) => 
         a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
@@ -19,6 +20,7 @@ const AllContacts = ({ navigation }) => {
         
     }
 
+    // Filter based on search input
     const filterContacts = (input) => {
         if (input === " " || input === null) {
             // If input is empty reset to unfilteredlisf
@@ -32,23 +34,24 @@ const AllContacts = ({ navigation }) => {
             a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
     };
 
-
+    // Update search filter
     const updateSearch = input => {
         setinput(input);
         filterContacts(input);
         console.log(input)
     }
 
-
+    // Used to add a new contact
     const addPerson = (contactData) =>{
         const newId = contactData.id
         const newName = contactData.firstName
         const newNumber = contactData.phoneNumbers[0].number
         const newImage = contactData.imageAvailable
         const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
-        fileService.addContact(newPerson)
+        fileService.addContact(newPerson);
     }
 
+    // This should just activate once when entering screen 
     useEffect(() => {
         (async () => {
             const contacts = await fileService.getAllContacts();
@@ -68,8 +71,8 @@ const AllContacts = ({ navigation }) => {
                     }
                 }
             }
-            // SORT SHOULD BE BE HERE BUT WHEN I ADD ANY FUNCTION OR ANYTHING INCLUDING CONSOLE.LOG IT DOES NOT WORK WHYYYYYYY????
-            //updateSearch("")
+            // SORT SHOULD BE HERE BUT WHEN I ADD ANY FUNCTION OR ANYTHING INCLUDING CONSOLE.LOG IT DOES NOT WORK WHYYYYYYY????
+            //updateSearch(" ");
         })();
     }, [useEffectCalled,setUseEffectCalled]);
 
@@ -96,5 +99,5 @@ const AllContacts = ({ navigation }) => {
         </View>
     )
 };
-// KILL ME
+
 export default AllContacts;
