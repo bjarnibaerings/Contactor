@@ -67,6 +67,7 @@ const allContacts = ({ navigation: {navigate}}) => {
                         const contactData = data[i]
                         addPerson(contactData)
                     }
+                    console.log("fsghsgofahghfdkghfkjlghfdklghskflgh")
                     sortDirectory()
                 }
             }
