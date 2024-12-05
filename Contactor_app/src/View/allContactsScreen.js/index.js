@@ -23,7 +23,6 @@ const AllContacts = ({ navigation }) => {
         if (input === " " || input === null) {
             // If input is empty reset to unfilteredlisf
             setContacts(unFilteredContacts);
-            sortDirectory()
             return;
         }
         const filteredContacts = [...unFilteredContacts].filter(contact =>
@@ -48,7 +47,6 @@ const AllContacts = ({ navigation }) => {
         const newImage = contactData.imageAvailable
         const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
         fileService.addContact(newPerson)
-        console.log(newPerson)
     }
 
     useEffect(() => {
@@ -57,6 +55,7 @@ const AllContacts = ({ navigation }) => {
             
             setContacts(contacts);
             setUnFilteredContacts(contacts);
+            // Ask permission for getting contacts
             const {status} = await phoneContacts.requestPermissionsAsync();
             if (status === "granted"){
                 
@@ -67,10 +66,10 @@ const AllContacts = ({ navigation }) => {
                         const contactData = data[i]
                         addPerson(contactData)
                     }
-                    console.log("fsghsgofahghfdkghfkjlghfdklghskflgh")
-                    sortDirectory()
                 }
             }
+            // SORT SHOULD BE BE HERE BUT WHEN I ADD ANY FUNCTION OR ANYTHING INCLUDING CONSOLE.LOG IT DOES NOT WORK WHYYYYYYY????
+            //updateSearch("")
         })();
     }, [useEffectCalled,setUseEffectCalled]);
 
