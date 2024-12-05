@@ -87,3 +87,15 @@ export const copyFile = async (file, newLocation) => {
         to: newLocation
     }));
 }
+/*Todo:
+    getAllImages (?)
+    addImage
+    loadImage
+    addContact
+    loadContact
+
+    updateContact
+        updateImage
+    deleteContact
+    deleteImage
+*/
