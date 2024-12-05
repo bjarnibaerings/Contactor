@@ -40,7 +40,7 @@ const AddContactModal = ({
                     source={{
                         uri:
                             contactImage ||
-                            "https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png",
+                            "https://static.vecteezy.com/system/resources/previews/003/715/527/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-vector.jpg",
                     }}
                     style={styles.imagePreview}
                 />
