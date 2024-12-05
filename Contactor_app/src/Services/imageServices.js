@@ -1,6 +1,6 @@
 import * as ImagePicker from 'expo-image-picker';
 
-const CAMERA_ROLL = 'CAMERA_ROLL'
+const CAMERA_ROLL = 'CAMERA_ROLL';
 const CAMERA = 'CAMERA';
 
 const getPermission = async permissionTypes => {

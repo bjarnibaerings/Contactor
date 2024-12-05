@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const { width: winWidth } = Dimensions.get("window");
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
     modal: {
         flex: 1,
         justifyContent: "center",
@@ -12,7 +12,7 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        flexGrow: .3,
+        flexGrow: .8,
         borderRadius: 10,
         width: winWidth - 100,
         backgroundColor: "white",
@@ -23,3 +23,5 @@ export default StyleSheet.create({
         marginBottom: 10
     }
 });
+
+export default styles;

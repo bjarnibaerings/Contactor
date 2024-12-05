@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const { width: winWidth } = Dimensions.get("window");
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
     icon:{
         width: 100,
         height: 100,
@@ -11,3 +11,5 @@ export default StyleSheet.create({
         alignItems: "center"
     }
 });
+
+export default styles;

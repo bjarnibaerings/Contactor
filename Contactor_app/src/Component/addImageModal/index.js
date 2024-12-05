@@ -1,8 +1,8 @@
-import React from 'react';
-import { Entypo } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
-import Modal from '../Modal';
-import styles from './styles';
+import React from "react";
+import { Entypo } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
+import Modal from "../Modal";
+import styles from "./styles";
 
 const AddImage = ({
     isOpen,

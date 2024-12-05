@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import styles from "./styles";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import styles from "./styles.js";
 import Modal from "../Modal";
 
 const AddContactModal = ({
@@ -12,6 +12,7 @@ const AddContactModal = ({
     contactPhoneNumber,
     setContactPhoneNumber,
     contactImage,
+    setContactImage,
     onSelectPhoto,
     onTakePhoto,
     onSave,
@@ -23,22 +24,43 @@ const AddContactModal = ({
             <TextInput
                 style={styles.input}
                 placeholder="Contact Name"
+                placeholderTextColor={"darkblue"}
                 value={contactName}
                 onChangeText={setContactName}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Contact Phone Number"
+                placeholderTextColor={"darkblue"}
                 value={contactPhoneNumber}
                 onChangeText={setContactPhoneNumber}
             />
-            <View style={styles.imageContainer}>
-                {contactImage && <Image source={{ uri: contactImage }} style={styles.imagePreview} />}
-                <TouchableOpacity style={styles.button} onPress={onSelectPhoto}>
-                    <Text style={styles.buttonText}>Pick from Gallery</Text>
+             <View style={styles.imageContainer}>
+                <Image
+                    source={{
+                        uri:
+                            contactImage ||
+                            "https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png",
+                    }}
+                    style={styles.imagePreview}
+                />
+                <TouchableOpacity
+                    style={styles.imageButton}
+                    onPress={async () => {
+                        const selectedImage = await onSelectPhoto();
+                        if (selectedImage) setContactImage(selectedImage);
+                    }}
+                >
+                    <Text style={styles.imageButtonText}>Pick from Gallery</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={onTakePhoto}>
-                    <Text style={styles.buttonText}>Take Photo</Text>
+                <TouchableOpacity
+                    style={styles.imageButton}
+                    onPress={async () => {
+                        const photo = await onTakePhoto();
+                        if (photo) setContactImage(photo);
+                    }}
+                >
+                    <Text style={styles.imageButtonText}>Take Photo</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.button} onPress={onSave}>
@@ -59,6 +81,7 @@ AddContactModal.propTypes = {
     contactPhoneNumber: PropTypes.string.isRequired,
     setContactPhoneNumber: PropTypes.func.isRequired,
     contactImage: PropTypes.string,
+    setContactImage: PropTypes.func.isRequired,
     onSelectPhoto: PropTypes.func.isRequired,
     onTakePhoto: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,

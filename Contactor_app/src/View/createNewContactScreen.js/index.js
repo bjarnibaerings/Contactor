@@ -7,7 +7,7 @@ import { getPermission, takePhoto, selectPhotoFromGallery } from "../../Services
 
 //Telma
 
-const NewContact = ({ route, navigation: {navigate}}) => {
+const NewContact = ({ navigation: {navigate}}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [contactName, setContactName] = useState("");
     const [contactPhoneNumber, setContactPhoneNumber] = useState("");

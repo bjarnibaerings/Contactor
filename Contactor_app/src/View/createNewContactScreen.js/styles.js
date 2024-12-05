@@ -18,18 +18,28 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 6,
         color: "black",
-        alignSelf: "center"
+        alignSelf: "center",
+        textAlign: "center",
+        padding: 28
     },
     buttonText:{
-        fontSize: 14,
-        color: "aqua",
-        textAlign: "center"
+        fontSize: 18,
+        color: "white",
+        textAlign: "center",
+        margin: 10,
+        padding: 10
     },
     button: {
-        padding: 10,
-        borderRadius: 6,
+        padding: 5,
+        borderRadius: 100,
         textAlign: "center",
-        color: "aquamarine",
-        borderColor: "aquamarine"
+        color: "white",
+        borderColor: "aquamarine",
+        backgroundColor: "aquamarine",
+        alignSelf: "center",
+        width: 300,
+        marginBottom: 30
     }
 });
+
+export default styles;

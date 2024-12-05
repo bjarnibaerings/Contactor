@@ -16,17 +16,21 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontWeight: "bold",
         color: "black",
-        backgroundColor: "white"
-
+        backgroundColor: "white",
+        alignSelf: "center",
+        margin: 15,
+        textAlign: "center"
     },
     input:{
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "aqua",
-        borderRadius: 2,
+        borderRadius: 5,
         padding: 12,
         margin: 18,
         fontSize: 16,
-        backgroundColor: "aquamarine"
+        backgroundColor: "lightskyblue",
+        fontcolor: "black",
+        color: "black",
     },
     imageIcon:{
         width: 100,
@@ -38,14 +42,19 @@ const styles = StyleSheet.create({
     button:{
         padding: 12,
         borderRadius: 6,
+        borderWidth: 2,
         borderColor: "aqua",
         textAlign: "center",
         color: "white",
+        backgroundColor: "lightblue",
+        margin: 5,
+        width: 200
     },
     buttonText:{
         fontSize: 16,
         fontWeight: "bold",
-        color: "aqua"
+        color: "aqua",
+        alignSelf: "center"
     },
     imageContainer: {
         alignItems: "center",
@@ -57,4 +66,23 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         marginBottom: 10,
     },
+    imageButton:{
+        padding: 12,
+        borderRadius: 6,
+        borderWidth: 2,
+        borderColor: "green",
+        textAlign: "center",
+        color: "white",
+        backgroundColor: "lightgreen",
+        margin: 5,
+        width: 200,
+    },
+    imageButtonText:{
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "darkgreen",
+        alignSelf: "center"
+    },
 });
+
+export default styles;
