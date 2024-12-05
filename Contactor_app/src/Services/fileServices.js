@@ -91,5 +91,4 @@ export const copyFile = async (file, newLocation) => {
         updateImage
     deleteContact
     deleteImage
-
 */

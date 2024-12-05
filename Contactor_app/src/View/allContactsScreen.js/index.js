@@ -6,7 +6,7 @@ import * as phoneContacts from "expo-contacts";
 
 //Bjarni
 
-const allContacts = ({ navigation: {navigate}}) => {
+const AllContacts = ({ navigation }) => {
     const [contactDirectory, setContacts] = useState([])
     const [searchInput, setinput] = useState("");
     const [unFilteredContacts,setUnFilteredContacts] = useState([]);
@@ -81,14 +81,14 @@ const allContacts = ({ navigation: {navigate}}) => {
             style={styles.listContainer}
             data={contactDirectory}
             keyExtractor={item => item.id}
-            renderItem={({item: {id, image, name}}) => {
+            renderItem={({item}) => { //took away deconstruction so i can pass item
                 return(
-                <View key={id} style={styles.boarderContainer}>
-                <TouchableOpacity onPress={() => navigate("chosenContactScreen")}>
-                <Image style={styles.ImageContainer} source={{uri:image}}/>
-                </TouchableOpacity>
-                <Text style={styles.titleName}>{name}</Text>
-                </View>
+                <View key={item.id} style={styles.boarderContainer}>
+                    <TouchableOpacity onPress={() => navigation.navigate("chosenContactScreen", {contact: item})}>
+                        <Image style={styles.ImageContainer} source={{uri:item.image}}/>
+                    </TouchableOpacity>
+                    <Text style={styles.titleName}>{item.name}</Text>
+                    </View>
                 )
             }}/>
         <TouchableOpacity style = {styles.ButtonContainer} onPress={() => navigate("createNewContactsScreen")}>
@@ -98,4 +98,4 @@ const allContacts = ({ navigation: {navigate}}) => {
     )
 };
 // KILL ME
-export default allContacts;
+export default AllContacts;
