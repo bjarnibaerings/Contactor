@@ -79,7 +79,7 @@ const AllContacts = ({ navigation: {navigate}}) => {
             renderItem={({item}) => { //took away deconstruction so i can pass item
                 return(
                 <View key={item.id} style={styles.boarderContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate("chosenContactScreen", {contact: item})}>
+                    <TouchableOpacity onPress={() => navigate("chosenContactScreen", {contact: item})}>
                         <Image style={styles.ImageContainer} source={{uri:item.image}}/>
                     </TouchableOpacity>
                     <Text style={styles.titleName}>{item.name}</Text>
