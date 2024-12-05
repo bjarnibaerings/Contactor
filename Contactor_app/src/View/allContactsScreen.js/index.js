@@ -14,6 +14,7 @@ const AllContacts = ({ navigation: {navigate}}) => {
 
 
 
+    // Filter based on search input
     const filterContacts = (input) => {
         if (input === " " || input === null) {
             // If input is empty reset to unfilteredlisf
@@ -27,40 +28,20 @@ const AllContacts = ({ navigation: {navigate}}) => {
             a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
     };
 
-
+    // Update search filter
     const updateSearch = input => {
         setinput(input);
         filterContacts(input);
         console.log(input)
     }
 
-
-    const addPerson = (contactData) =>{
-        const newId = contactData.id
-        const newName = contactData.firstName
-        const newNumber = contactData.phoneNumbers[0].number
-        const newImage = contactData.imageAvailable
-        const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
-        fileService.addContact(newPerson)
-    }
+    
 
     const fetchContacts = async () => {
         
-
         const contacts = await fileService.getAllContacts();
         setContacts(contacts);
         setUnFilteredContacts(contacts);
-
-        const { status } = await phoneContacts.requestPermissionsAsync();
-        if (status === "granted") {
-            const { data } = await phoneContacts.getContactsAsync();
-            if (data.length > 0) {
-                for (let i = 0; i < data.length; i++) {
-                    const contactData = data[i];
-                    addPerson(contactData);
-                }
-            }
-        }
     };
     
     //using use focus effect for refresh
@@ -92,5 +73,5 @@ const AllContacts = ({ navigation: {navigate}}) => {
         </View>
     )
 };
-// KILL ME
+
 export default AllContacts;
