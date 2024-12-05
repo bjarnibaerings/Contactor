@@ -31,7 +31,10 @@ const setupDirectory = async () => {
 
 export const remove = async (contactRemove) => {
     // { idempotent: true } This means you wont get an erro if you try to delete something that does not exists
-    return await onException(() => fileSystem.deleteAsync(contactDirectory + "/" + "-" + contactRemove.id +".json", { idempotent: true }));
+    const fileUri = `${contactDirectory}/${contactRemove.name}-${contactRemove.id}.json`; // Match naming convention
+    console.log("Attempting to remove file:", fileUri);
+    return await onException(() => fileSystem.deleteAsync(fileUri, { idempotent: true }));
+    
 }
 
 /*
@@ -48,7 +51,14 @@ export const addContact = async (contactInformation) =>{
     }
     const fileUri = contactDirectory +"/"+contactInformation.name + "-" + contactInformation.id +".json";
     const jsonContents = JSON.stringify(contactInformation);
-    fileSystem.writeAsStringAsync(fileUri,jsonContents);
+    console.log("We made it here")
+
+    try {
+        await fileSystem.writeAsStringAsync(fileUri, jsonContents);
+    } catch (error) {
+        console.log("Error saving contact:", error);
+        throw error;
+    }
 }
 
 export const getAllContacts = async () => {
