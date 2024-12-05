@@ -13,30 +13,31 @@ const allContacts = ({ navigation: {navigate}}) => {
     const [useEffectCalled,setUseEffectCalled] = useState([]);
 
     const sortDirectory = () =>{
-        const sortedDirect = contactDirectory.sort((a,b) => 
+        const sortedDirect = [...contactDirectory].sort((a,b) => 
         a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-        console.log(sortedDirect)
         setContacts(sortedDirect)
+        
     }
 
     const filterContacts = (input) => {
-        if (input === "") {
+        if (input === " " || input === null) {
             // If input is empty reset to unfilteredlisf
             setContacts(unFilteredContacts);
             sortDirectory()
             return;
         }
-        const filteredContacts = unFilteredContacts.filter(contact =>
+        const filteredContacts = [...unFilteredContacts].filter(contact =>
             contact.name.toLowerCase().includes(input.toLowerCase())
-        );
-        setContacts(filteredContacts);
-        sortDirectory()
+        )
+        setContacts([...filteredContacts].sort((a, b) => 
+            a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
     };
 
 
     const updateSearch = input => {
         setinput(input);
         filterContacts(input);
+        console.log(input)
     }
 
 
@@ -47,6 +48,7 @@ const allContacts = ({ navigation: {navigate}}) => {
         const newImage = contactData.imageAvailable
         const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
         fileService.addContact(newPerson)
+        console.log(newPerson)
     }
 
     useEffect(() => {
@@ -65,6 +67,7 @@ const allContacts = ({ navigation: {navigate}}) => {
                         const contactData = data[i]
                         addPerson(contactData)
                     }
+                    console.log("fsghsgofahghfdkghfkjlghfdklghskflgh")
                     sortDirectory()
                 }
             }
@@ -74,7 +77,6 @@ const allContacts = ({ navigation: {navigate}}) => {
     return(
         <View>
         <TextInput style={styles.textInput} placeholder="Search" onChangeText={input => updateSearch(input)}/>
-        
             <FlatList
             style={styles.listContainer}
             data={contactDirectory}
