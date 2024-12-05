@@ -35,33 +35,13 @@ const AllContacts = ({ navigation: {navigate}}) => {
         console.log(input)
     }
 
-    // Used to add a new contact
-    const addPerson = (contactData) =>{
-        const newId = contactData.id
-        const newName = contactData.firstName
-        const newNumber = contactData.phoneNumbers[0].number
-        const newImage = contactData.imageAvailable
-        const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
-        fileService.addContact(newPerson);
-    }
+    
 
     const fetchContacts = async () => {
         
-
         const contacts = await fileService.getAllContacts();
         setContacts(contacts);
         setUnFilteredContacts(contacts);
-
-        const { status } = await phoneContacts.requestPermissionsAsync();
-        if (status === "granted") {
-            const { data } = await phoneContacts.getContactsAsync();
-            if (data.length > 0) {
-                for (let i = 0; i < data.length; i++) {
-                    const contactData = data[i];
-                    addPerson(contactData);
-                }
-            }
-        }
     };
     
     //using use focus effect for refresh
@@ -80,7 +60,7 @@ const AllContacts = ({ navigation: {navigate}}) => {
             renderItem={({item}) => { //took away deconstruction so i can pass item
                 return(
                 <View key={item.id} style={styles.boarderContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate("chosenContactScreen", {contact: item})}>
+                    <TouchableOpacity onPress={() => navigate("chosenContactScreen", {contact: item})}>
                         <Image style={styles.ImageContainer} source={{uri:item.image}}/>
                     </TouchableOpacity>
                     <Text style={styles.titleName}>{item.name}</Text>
