@@ -46,5 +46,15 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         color: "aqua"
-    }
+    },
+    imageContainer: {
+        alignItems: "center",
+        marginVertical: 10,
+    },
+    imagePreview: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        marginBottom: 10,
+    },
 });

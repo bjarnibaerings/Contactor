@@ -11,6 +11,9 @@ const AddContactModal = ({
     setContactName,
     contactPhoneNumber,
     setContactPhoneNumber,
+    contactImage,
+    onSelectPhoto,
+    onTakePhoto,
     onSave,
     onCancel,
 }) => (
@@ -29,6 +32,15 @@ const AddContactModal = ({
                 value={contactPhoneNumber}
                 onChangeText={setContactPhoneNumber}
             />
+            <View style={styles.imageContainer}>
+                {contactImage && <Image source={{ uri: contactImage }} style={styles.imagePreview} />}
+                <TouchableOpacity style={styles.button} onPress={onSelectPhoto}>
+                    <Text style={styles.buttonText}>Pick from Gallery</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={onTakePhoto}>
+                    <Text style={styles.buttonText}>Take Photo</Text>
+                </TouchableOpacity>
+            </View>
             <TouchableOpacity style={styles.button} onPress={onSave}>
                 <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
@@ -46,6 +58,9 @@ AddContactModal.propTypes = {
     setContactName: PropTypes.func.isRequired,
     contactPhoneNumber: PropTypes.string.isRequired,
     setContactPhoneNumber: PropTypes.func.isRequired,
+    contactImage: PropTypes.string,
+    onSelectPhoto: PropTypes.func.isRequired,
+    onTakePhoto: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
 };

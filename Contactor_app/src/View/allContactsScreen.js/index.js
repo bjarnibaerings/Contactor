@@ -52,7 +52,7 @@ const AllContacts = ({ navigation: {navigate}}) => {
     useEffect(() => {
         (async () => {
             const contacts = await fileService.getAllContacts();
-            
+            console.log("Fuck This", contacts)
             setContacts(contacts);
             setUnFilteredContacts(contacts);
             const {status} = await phoneContacts.requestPermissionsAsync();

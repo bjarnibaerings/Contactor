@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Alert } from "react-native";
 import styles from "./styles.js";
 import AddContactModal from "../../Component/addNewContactModal";
 import { addContact } from "../../Services/fileServices";
+import { getPermission, takePhoto, selectPhotoFromGallery } from "../../Services/imageServices.js";
 
 //Telma
 
@@ -45,6 +46,32 @@ const NewContact = ({ route, navigation: {navigate}}) => {
         Alert.alert("Coming soon!", "This is where we will implement contact import :)");
     };
 
+    const handleSelectPhoto = async () => {
+        const permissionGranted = await getPermission("gallery");
+        if (!permissionGranted) {
+            Alert.alert("Permission Denied", "Enable permission in your phone settings to access the images in your gallery.");
+            return;
+        }
+
+        const imageUri = await selectPhotoFromGallery();
+        if (imageUri) {
+            setContactImage(imageUri);
+        }
+    };
+
+    const handleTakePhoto = async () => {
+        const permissionGranted = await getPermission("camera");
+        if (!permissionGranted) {
+            Alert.alert("Permission Denied", "Enable permission in your phone settings to take a photo with your phone's camera.");
+            return;
+        }
+
+        const imageUri = await takePhoto();
+        if (imageUri) {
+            setContactImage(imageUri);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}> Create New Contact or Import Contact</Text>
@@ -63,6 +90,10 @@ const NewContact = ({ route, navigation: {navigate}}) => {
                     setContactName={setContactName}
                     contactPhoneNumber={contactPhoneNumber}
                     setContactPhoneNumber={setContactPhoneNumber}
+                    contactImage={contactImage}
+                    setContactImage={setContactImage}
+                    onSelectPhoto={handleSelectPhoto}
+                    onTakePhoto={handleTakePhoto}
                     onSave={handleSaveContact}
                     onCancel={closeModal}
                 />
