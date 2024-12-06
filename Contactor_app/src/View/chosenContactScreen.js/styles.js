@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         fontcolor: "black",
         color: "black",
-        fontWeight: "bold", // Added property to make text bold
+        fontWeight: "bold", 
     },
     
 });

@@ -81,7 +81,7 @@ const ChosenContact = ({ route, navigation}) => {
             
             <EditContactModal visible={isEditModalVisible} onClose={toggleEditModal} contact={currentContact} onSave={(updatedContact) => {editContact(updatedContact); toggleEditModal();}} />
             <View style={styles.editButton}>
-            <Button color={"white"} title="Call Contact" onPress={makeCall}  />
+                <Button title="Call Contact" onPress={makeCall}  />
             </View>
         </View>
     )
