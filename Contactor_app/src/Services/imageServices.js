@@ -37,7 +37,7 @@ export const openGallery = async () => {
     await getPermission([CAMERA_ROLL]);
     const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
-        quality: 0.7,
+        quality: 0.8,
     });
 
     if (result.canceled) return null;
