@@ -1,33 +1,24 @@
 import React from "react";
-import { View, Text, Modal, Button } from "react-native";
+import { View, Text, Modal, Button, TouchableOpacity} from "react-native";
 import * as imageServices from "../../Services/imageServices"
 import styles from "./stlyes"
 
 const ImageModal = ({ visible, onClose, onImageSelect}) => {
+
     const handleCamera = async () => {
-        try {
-            const imageUri = await imageServices.openCamera();
-            if (imageUri) {
-                onImageSelect(imageUri); //this passes the uri
-            }
-        } catch (error) {
-            console.error("Error trying to access camera:", error);
-        } finally {
-            onClose();
+        const imageUri = await imageServices.openCamera();
+        if (imageUri) {
+            onImageSelect(imageUri); // This passes the URI
         }
+        onClose(); // Close the modal
     };
 
     const handleGallery = async () => {
-        try {
-            const imageUri = await imageServices.openGallery();
-            if (imageUri) {
-                onImageSelect(imageUri); 
-            }
-        } catch (error) {
-            console.error("Error trying to access galery:", error);
-        } finally {
-            onClose();
+        const imageUri = await imageServices.openGallery();
+        if (imageUri) {
+            onImageSelect(imageUri);
         }
+        onClose(); 
     };
     
     return (
@@ -35,9 +26,18 @@ const ImageModal = ({ visible, onClose, onImageSelect}) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text style={styles.modalTitle}>Choose an Image</Text>
-                    <Button title="Take a Photo" onPress={handleCamera} />
-                    <Button title="Choose from Gallery" onPress={handleGallery} />
-                    <Button title="Close" onPress={onClose} color="red" />
+
+                    <TouchableOpacity style={styles.button} onPress={handleCamera}>
+                        <Text style={styles.buttonText}>Take a Photo</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button} onPress={handleGallery}>
+                        <Text style={styles.buttonText}>Choose from Gallery</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button} onPress={onClose}>
+                        <Text style={styles.buttonText}>Close</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>

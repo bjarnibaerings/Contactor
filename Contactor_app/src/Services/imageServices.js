@@ -28,7 +28,7 @@ export const openCamera = async () => {
     });
     if (result.canceled) return null; //return null if nothing is selected
     
-    return result.assets ? result.assets[0].uri : result.uri; //simplified so we can send the right uri back to be used
+    return result.assets ? result.assets[0].uri : result.uri; //simplified so we can send JUST the uri back to be used
 };
 
 
