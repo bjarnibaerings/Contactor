@@ -39,7 +39,6 @@ const AllContacts = ({ navigation: {navigate}}) => {
     
 
     const fetchContacts = async () => {
-        
         const contacts = await fileService.getAllContacts();
         setContacts([...contacts].sort((a, b) => 
             a.name.toLowerCase().localeCompare(b.name.toLowerCase())));

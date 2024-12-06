@@ -83,6 +83,15 @@ const styles = StyleSheet.create({
         color: "cadetblue",
         alignSelf: "center"
     },
+    contactImage: {
+    width: 100, 
+    height: 100, 
+    borderRadius: 50,
+    borderWidth: 2, 
+    borderColor: "darkblue", 
+    marginVertical: 10,
+    resizeMode: "cover", 
+},
 });
 
 export default styles;
