@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     },
     container:{
         paddingHorizontal: 18,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     title:{
         fontSize: 26,
@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     },
     input:{
         borderWidth: 2,
-        borderColor: "aqua",
+        borderColor: "darkblue",
         borderRadius: 5,
         padding: 12,
         margin: 18,
         fontSize: 16,
-        backgroundColor: "lightskyblue",
+        backgroundColor: "white",
         fontcolor: "black",
         color: "black",
     },
@@ -43,17 +43,17 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 6,
         borderWidth: 2,
-        borderColor: "aqua",
+        borderColor: "darkblue",
         textAlign: "center",
         color: "white",
-        backgroundColor: "lightblue",
+        backgroundColor: "white",
         margin: 5,
         width: 200
     },
     buttonText:{
         fontSize: 16,
         fontWeight: "bold",
-        color: "aqua",
+        color: "darkblue",
         alignSelf: "center"
     },
     imageContainer: {
@@ -70,17 +70,17 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 6,
         borderWidth: 2,
-        borderColor: "green",
+        borderColor: "cadetblue",
         textAlign: "center",
         color: "white",
-        backgroundColor: "lightgreen",
+        backgroundColor: "lightblue",
         margin: 5,
         width: 200,
     },
     imageButtonText:{
         fontSize: 16,
         fontWeight: "bold",
-        color: "darkgreen",
+        color: "cadetblue",
         alignSelf: "center"
     },
 });

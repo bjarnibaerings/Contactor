@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: WinWidth - 100,
         backgroundColor: "white",
-        padding: 40
+        padding: 40,
     },
     title:{
         fontSize: 24,
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         color: "black",
         alignSelf: "center",
         textAlign: "center",
-        padding: 28
+        padding: 28,
     },
     buttonText:{
         fontSize: 18,
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         textAlign: "center",
         color: "white",
-        borderColor: "aquamarine",
-        backgroundColor: "aquamarine",
+        borderColor: "darkblue",
+        backgroundColor: "darkblue",
         alignSelf: "center",
         width: 300,
         marginBottom: 30

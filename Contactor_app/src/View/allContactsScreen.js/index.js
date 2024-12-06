@@ -71,7 +71,7 @@ const AllContacts = ({ navigation: {navigate}}) => {
                 )
             }}/>
         <TouchableOpacity style = {styles.ButtonContainer} onPress={() => navigate("createNewContactsScreen")}>
-            <Text style = {styles.Button}>Add New Contact</Text>
+            <Text style = {styles.Button}>Manage Contacts</Text>
         </TouchableOpacity>
         </View>
     )
