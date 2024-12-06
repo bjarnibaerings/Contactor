@@ -8,7 +8,7 @@ const EditContactModal = ({ visible, onClose, contact, onSave }) => {
     const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber)
 
     const handleSave = () => {
-        onSave({ ...contact, name, phoneNumber: phoneNumber});
+        onSave({ ...contact, name, phoneNumber: phoneNumber });
         onClose(); 
     };
 

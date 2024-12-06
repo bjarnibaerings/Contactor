@@ -51,6 +51,8 @@ const ChosenContact = ({ route, navigation}) => {
         Linking.openURL(phoneNumber);
     };
 
+    console.log(currentContact)
+
     return (
         <View style = {styles.container}>
             <View style = {styles.information}>
@@ -61,15 +63,26 @@ const ChosenContact = ({ route, navigation}) => {
                     <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={imageSelect}/>
                 </View>
                 <Text style = {styles.text}>Name: {currentContact.name}</Text>
-                <Text style = {styles.text}>Phone number: {currentContact.phoneNumber}</Text>
+                <Text style = {styles.text}>phone number:{currentContact.phoneNumber}</Text>
             </View>
-            <Button title="Remove" onPress={async () => {
-                    await remove(currentContact);
-                    Alert.alert("Contact Removed", `${currentContact.name} has been successfully removed.`);
-                    navigation.goBack(); }}/>
-            <Button title="Edit Profile" onPress={toggleEditModal} style={styles.editButton} />
+            <View style={styles.editButton}>
+                <Button title="Remove" onPress={async () => {
+                        await remove(currentContact);
+                        Alert.alert("Contact Removed", `${currentContact.name} has been successfully removed.`);
+                        navigation.goBack(); }}
+                        color={"white"}
+                        />
+            </View>
+            <View style={styles.editButton}>
+                <Button title="Edit Profile" onPress={toggleEditModal}
+                    color={"white"}
+                />
+            </View>
+            
             <EditContactModal visible={isEditModalVisible} onClose={toggleEditModal} contact={currentContact} onSave={(updatedContact) => {editContact(updatedContact); toggleEditModal();}} />
-            <Button title="Call Contact" onPress={makeCall} />
+            <View style={styles.editButton}>
+            <Button color={"white"} title="Call Contact" onPress={makeCall}  />
+            </View>
         </View>
     )
 };
