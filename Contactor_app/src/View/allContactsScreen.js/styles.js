@@ -30,7 +30,17 @@ export default StyleSheet.create({
     },
     ButtonContainer:{
         alignSelf: "center",
-        marginBottom: 10
+        marginBottom: 10,
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+    },
+    manageButton:{
+        alignSelf: "center",
+        marginBottom: 10,
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        position: 'absolute',
+        bottom:-700,
     },
     boarderContainer:{
         flex: 1,
@@ -49,6 +59,6 @@ export default StyleSheet.create({
         backgroundColor: "aliceblue"
     },
     listContainer: {
-        maxHeight: 670
+        maxHeight: 650
     }
 });
