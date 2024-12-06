@@ -50,6 +50,9 @@ export const addContact = async (contactInformation) =>{
         
         contactInformation.image = "https://static.vecteezy.com/system/resources/previews/003/715/527/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-vector.jpg"
     }
+    else{
+        contactInformation.image
+    }
     const fileUri = contactDirectory +"/"+contactInformation.name + "-" + contactInformation.id +".json";
     console.log(contactInformation.image)
     const jsonContents = JSON.stringify(contactInformation);
