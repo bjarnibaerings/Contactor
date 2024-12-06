@@ -4,7 +4,7 @@ import styles from "./styles";
 import EditContactModal from "../../Component/editContactModal";
 import ImageModal from "../../Component/ImageModal";
 import { addContact, remove } from "../../Services/fileServices";
-import * as imageServices from "../../Services/imageServices"
+
 
 const ChosenContact = ({ route, navigation}) => {
     const { contact } = route.params;

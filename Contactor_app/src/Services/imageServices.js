@@ -3,37 +3,43 @@ import * as ImagePicker from 'expo-image-picker';
 const CAMERA_ROLL = 'CAMERA_ROLL';
 const CAMERA = 'CAMERA';
 
-const getPermission = async permissionTypes => {
-    if (permissionTypes.indexOf(CAMERA) >= 0) {
-        await ImagePicker.requestCameraPermissionsAsync();
-    }
-    if (permissionTypes.indexOf(CAMERA_ROLL) >= 0) {
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
+const getPermission = async (permissionTypes) => {
+    if (permissionTypes.includes(CAMERA)) {
+        const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+        if (!cameraPermission.granted) {
+            Alert.alert("Permission Required!");
+        }
+    } //only happens when permission is cancelled
+
+    if (permissionTypes.includes(CAMERA_ROLL)) {
+        const mediaPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!mediaPermission.granted) {
+            Alert.alert("Permission Required!");
+        }
     }
 };
 
-export const selectFromCameraRoll = async () => {
+export const openCamera = async () => {
+    await getPermission([CAMERA]); //permission
+
+    const result = await ImagePicker.launchCameraAsync({ //open function from imagepicker required to open camera
+        allowsEditing: true,
+        quality: 0.8,
+    });
+    if (result.canceled) return null; //return null if nothing is selected
+    
+    return result.assets ? result.assets[0].uri : result.uri; //simplified so we can send the right uri back to be used
+};
+
+
+//repeated steps for gallery
+export const openGallery = async () => {
     await getPermission([CAMERA_ROLL]);
     const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: .8,
-        base64: true,
-        aspect: [16, 9]
+        allowsEditing: true,
+        quality: 0.7,
     });
 
-    if (result.canceled) { return ''; }
-    return result.uri;
-};
-
-export const takePhoto = async () => {
-    await getPermission([CAMERA, CAMERA_ROLL]);
-    const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: .8,
-        base64: true,
-        aspect: [16, 9]
-    });
-
-    if (result.canceled) { return ''; }
-    return result.uri;
+    if (result.canceled) return null;
+    return result.assets ? result.assets[0].uri : result.uri;
 };
