@@ -16,9 +16,10 @@ const AllContacts = ({ navigation: {navigate}}) => {
 
     // Filter based on search input
     const filterContacts = (input) => {
-        if (input === " " || input === null) {
+        if (input === "" || input === null) {
             // If input is empty reset to unfilteredlisf
-            setContacts(unFilteredContacts);
+            setContacts([...unFilteredContacts].sort((a, b) => 
+                a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
             return;
         }
         const filteredContacts = [...unFilteredContacts].filter(contact =>
@@ -40,8 +41,10 @@ const AllContacts = ({ navigation: {navigate}}) => {
     const fetchContacts = async () => {
         
         const contacts = await fileService.getAllContacts();
-        setContacts(contacts);
-        setUnFilteredContacts(contacts);
+        setContacts([...contacts].sort((a, b) => 
+            a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
+        setUnFilteredContacts([...contacts].sort((a, b) => 
+            a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
     };
     
     //using use focus effect for refresh
