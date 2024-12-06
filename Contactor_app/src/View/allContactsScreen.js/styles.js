@@ -21,12 +21,13 @@ export default StyleSheet.create({
         paddingBottom: 10,
         paddingLeft: 32,
         paddingRight: 30,
-        borderColor: "black",
         borderWidth: 2,
-        backgroundColor: "lightgray",
-        shadowColor: "black",
-        shadowOffset: {height: 10, width: 10},
-        shadowOpacity: 0.3
+        borderRadius: 100,
+        textAlign: "center",
+        color: "white",
+        borderColor: "darkblue",
+        backgroundColor: "darkblue",
+        fontSize: 18
     },
     ButtonContainer:{
         alignSelf: "center",
