@@ -61,7 +61,7 @@ const ChosenContact = ({ route, navigation}) => {
                     <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={imageSelect}/>
                 </View>
                 <Text style = {styles.text}>Name: {currentContact.name}</Text>
-                <Text style = {styles.text}>phone number:{currentContact.number}</Text>
+                <Text style = {styles.text}>Phone number:{currentContact.number}</Text>
             </View>
 
             <Button title="Remove" onPress={async () => {

@@ -41,7 +41,7 @@ const AddContactModal = ({
              <View style={styles.imageContainer}>
                 <TouchableOpacity onPress={toggleImageModal}>
                         <Image source={{ uri:  "https://static.vecteezy.com/system/resources/previews/003/715/527/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-vector.jpg" }} style={styles.contactImage} />
-                    </TouchableOpacity>
+                </TouchableOpacity>
                     <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={handleImageSelect}/>
             </View>
             <TouchableOpacity style={styles.button} onPress={onSave}>
