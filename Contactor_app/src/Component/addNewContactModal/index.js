@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import styles from "./styles.js";
 import Modal from "../Modal";
+import ImageModal from "../../Component/ImageModal";
+import { takePhoto, selectFromCameraRoll } from "../../Services/imageServices.js";
 
 const AddContactModal = ({
     isOpen,
@@ -13,8 +15,8 @@ const AddContactModal = ({
     setContactPhoneNumber,
     contactImage,
     setContactImage,
-    onSelectPhoto,
-    onTakePhoto,
+    selectFromCameraRoll,
+    takePhoto,
     onSave,
     onCancel,
 }) => (
@@ -37,32 +39,10 @@ const AddContactModal = ({
                 onChangeText={setContactPhoneNumber}
             />
              <View style={styles.imageContainer}>
-                <Image
-                    source={{
-                        uri:
-                            contactImage ||
-                            "https://static.vecteezy.com/system/resources/previews/003/715/527/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-vector.jpg",
-                    }}
-                    style={styles.imagePreview}
-                />
-                <TouchableOpacity
-                    style={styles.imageButton}
-                    onPress={async () => {
-                        const selectedImage = await onSelectPhoto();
-                        if (selectedImage) setContactImage(selectedImage);
-                    }}
-                >
-                    <Text style={styles.imageButtonText}>Pick from Gallery</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.imageButton}
-                    onPress={async () => {
-                        const photo = await onTakePhoto();
-                        if (photo) setContactImage(photo);
-                    }}
-                >
-                    <Text style={styles.imageButtonText}>Take Photo</Text>
-                </TouchableOpacity>
+                <TouchableOpacity onPress={toggleImageModal}>
+                        <Image source={{ uri:  "https://static.vecteezy.com/system/resources/previews/003/715/527/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-vector.jpg" }} style={styles.contactImage} />
+                    </TouchableOpacity>
+                    <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={handleImageSelect}/>
             </View>
             <TouchableOpacity style={styles.button} onPress={onSave}>
                 <Text style={styles.buttonText}>Save</Text>
