@@ -47,7 +47,7 @@ const NewContact = ({ navigation: {navigate}}) => {
         Alert.alert("Coming soon!", "This is where we will implement contact import :)");
     };
 
-    // Used to add a new contact
+    // Used to add a new contact for importing contacts
     const addPerson = (contactData) =>{
         const newId = contactData.id
         const newName = contactData.firstName
