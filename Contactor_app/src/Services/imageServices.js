@@ -21,7 +21,7 @@ export const selectFromCameraRoll = async () => {
         aspect: [16, 9]
     });
 
-    if (result.cancelled) { return ''; }
+    if (result.canceled) { return ''; }
     return result.uri;
 };
 
@@ -34,6 +34,6 @@ export const takePhoto = async () => {
         aspect: [16, 9]
     });
 
-    if (result.cancelled) { return ''; }
+    if (result.canceled) { return ''; }
     return result.uri;
 };
