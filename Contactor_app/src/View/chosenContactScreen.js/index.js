@@ -61,9 +61,8 @@ const ChosenContact = ({ route, navigation}) => {
                     <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={imageSelect}/>
                 </View>
                 <Text style = {styles.text}>Name: {currentContact.name}</Text>
-                <Text style = {styles.text}>phone number:{currentContact.number}</Text>
+                <Text style = {styles.text}>phone number:{currentContact.phoneNumber}</Text>
             </View>
-
             <Button title="Remove" onPress={async () => {
                     await remove(currentContact);
                     Alert.alert("Contact Removed", `${currentContact.name} has been successfully removed.`);
