@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: "#F2F1F1",
-        position: "relative", // Ensures children can use absolute positioning
+        position: "relative", 
     },
     information: {
         flex:1,
@@ -13,20 +13,32 @@ const styles = StyleSheet.create({
         backgroundColor: "#E8E7E7",
     },
     contactImage: {
-        width: 100, // Set the image size
+        width: 100, 
         height: 100,
-        borderRadius: 50, // Make the image circular
+        borderRadius: 50, 
         backgroundColor: "red"
     },
     imageContainer: {
         alignItems: "center", 
-        backgroundColor: "blue"
+        backgroundColor: "#F2F1F1"
     },
     editButton: {
-        position: "absolute", // Fixes the button position
-        bottom: 20, // Distance from the bottom of the screen
-        left: 20, // Optional: Align left
-        right: 20, // Optional: Align right
+        position: "absolute", 
+        bottom: 20, 
+        left: 20, 
+        right: 20, 
+    },
+    text:{
+        borderWidth: 2,
+        borderColor: "darkblue",
+        borderRadius: 5,
+        padding: 12,
+        margin: 18,
+        fontSize: 16,
+        backgroundColor: "white",
+        fontcolor: "black",
+        color: "black",
+        fontWeight: "bold", // Added property to make text bold
     },
 
 });
