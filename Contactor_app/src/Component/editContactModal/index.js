@@ -13,12 +13,7 @@ const EditContactModal = ({ visible, onClose, contact, onSave }) => {
     };
 
     return (
-        <Modal
-            animationType="slide"
-            transparent={true}
-            visible={visible}
-            onRequestClose={onClose} // Handles Android back button
-        >
+        <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text style={styles.title}>Edit Contact</Text>
