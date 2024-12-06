@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Button, TouchableHighlight, Image, TouchableOpacity, FlatList, Alert } from "react-native";
+import { View, Text, Button, Image, TouchableOpacity, Alert, Linking } from "react-native";
 import styles from "./styles";
 import EditContactModal from "../../Component/editContactModal";
 import ImageModal from "../../Component/ImageModal";
 import { addContact, remove } from "../../Services/fileServices";
-import * as imageServices from "../../Services/imageServices"
+
 
 const ChosenContact = ({ route, navigation}) => {
     const { contact } = route.params;
@@ -19,17 +19,15 @@ const ChosenContact = ({ route, navigation}) => {
         setImageModalVisible(!isImageModalVisible);
     };
 
-    const handleImageSelect = async (uri) => {
+    const imageSelect = async (uri) => { //this takes uri from the modal and changes it from the currentContact to the updatedContact.
         const updatedContact = { ...currentContact, image: uri };
-        console.log(currentContact)
-        console.log(updatedContact)
         try {    
             await remove(currentContact);
             await addContact(updatedContact);
             setCurrentContact(updatedContact);
         } catch (error) {
-            console.error("Error updating contact image:", error);
-            Alert.alert("Error", "Failed to update contact image.");
+            console.error("Error updating image :/", error);
+  
         }
     };
 
@@ -40,15 +38,19 @@ const ChosenContact = ({ route, navigation}) => {
             await remove(contact);
             await addContact(updateContact);
             setCurrentContact(updateContact);
-            
 
         } catch (error) {
             console.error("Error updating contact:", error);
-            Alert.alert("Error", "Failed to update contact.");
         }
         
     }
     
+    // *** Added function for making a call ***
+    const makeCall = () => {
+        const phoneNumber = `tel:${currentContact.number}`;
+        Linking.openURL(phoneNumber);
+    };
+
     return (
         <View style = {styles.container}>
             <View style = {styles.information}>
@@ -56,23 +58,20 @@ const ChosenContact = ({ route, navigation}) => {
                     <TouchableOpacity onPress={toggleImageModal}>
                         <Image source={{ uri: currentContact.image }} style={styles.contactImage} />
                     </TouchableOpacity>
-                    <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={handleImageSelect}/>
+                    <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={imageSelect}/>
                 </View>
-                <Text>This should be the name:{currentContact.name}</Text>
-                <Text>This should be the phone number:{currentContact.number}</Text>
+                <Text>Contact name:{currentContact.name}</Text>
+                <Text>phone number:{currentContact.number}</Text>
                 <Text>here is the ID: {currentContact.id}</Text>
-                <Text>SHOULD BE ABLE TO EDIT THIS PROFILE</Text>
             </View>
-            <Text>!!!As a result of modifying the contact the JSON file associated
-            with this contact should be recreated with the new information!!! name, phoneNumber and photo (how the data should look like)</Text>
-            <Text>So basically we are deleting and recreating? </Text>
+
             <Button title="Remove" onPress={async () => {
                     await remove(currentContact);
                     Alert.alert("Contact Removed", `${currentContact.name} has been successfully removed.`);
                     navigation.goBack(); }}/>
             <Button title="Edit Profile" onPress={toggleEditModal} style={styles.editButton} />
             <EditContactModal visible={isEditModalVisible} onClose={toggleEditModal} contact={currentContact} onSave={(updatedContact) => {editContact(updatedContact); toggleEditModal();}} />
-            
+            <Button title="Call Contact" onPress={makeCall} />
         </View>
     )
 };
