@@ -11,7 +11,7 @@ const EditContactModal = ({ visible, onClose, contact, onSave }) => {
         onSave({ ...contact, name, phoneNumber: phoneNumber });
         onClose(); 
     };
-
+    //comment
     return (
         <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.modalContainer}>
