@@ -23,10 +23,18 @@ const styles = StyleSheet.create({
         backgroundColor: "#F2F1F1"
     },
     editButton: {
-        position: "absolute", 
-        bottom: 20, 
-        left: 20, 
-        right: 20, 
+        padding: 5,
+        borderRadius: 100,
+        textAlign: "center",
+        color: "white",
+        borderColor: "darkblue",
+        backgroundColor: "darkblue",
+        alignSelf: "center",
+        width: 300,
+        marginBottom: 10
+    },
+    buttonText:{
+        fontSize : 30
     },
     text:{
         borderWidth: 2,
@@ -40,7 +48,7 @@ const styles = StyleSheet.create({
         color: "black",
         fontWeight: "bold", // Added property to make text bold
     },
-
+    
 });
 
 export default styles
