@@ -50,6 +50,7 @@ const NewContact = ({ navigation: {navigate}}) => {
     // Used to add a new contact for importing contacts
     const addPerson = (contactData) =>{
         const newId = contactData.id
+        console.log(contactData.firstName, contactData.id);
         const newName = contactData.firstName
         const newNumber = contactData.phoneNumbers[0].number
         const newImage = contactData.imageAvailable
