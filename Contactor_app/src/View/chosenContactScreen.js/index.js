@@ -47,9 +47,11 @@ const ChosenContact = ({ route, navigation}) => {
     
     // make call
     const makeCall = () => {
-        const phoneNumber = `tel:${currentContact.number}`;
+        const phoneNumber = `tel:${currentContact.phoneNumber}`;
         Linking.openURL(phoneNumber);
     };
+
+    console.log(currentContact)
 
     return (
         <View style = {styles.container}>
@@ -61,7 +63,7 @@ const ChosenContact = ({ route, navigation}) => {
                     <ImageModal visible={isImageModalVisible} onClose={toggleImageModal} onImageSelect={imageSelect}/>
                 </View>
                 <Text style = {styles.text}>Name: {currentContact.name}</Text>
-                <Text style = {styles.text}>phone number:{currentContact.number}</Text>
+                <Text style = {styles.text}>phone number:{currentContact.phoneNumber}</Text>
             </View>
             <View style={styles.editButton}>
                 <Button title="Remove" onPress={async () => {
