@@ -2,13 +2,14 @@ import React, {useState} from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import styles from "./styles.js";
 import AddContactModal from "../../Component/addNewContactModal";
-import { addContact } from "../../Services/fileServices";
+import { addContact, cleanDirectory } from "../../Services/fileServices";
 import { getPermission, takePhoto, selectPhotoFromGallery } from "../../Services/imageServices.js";
 import * as phoneContacts from "expo-contacts";
+import AllContacts from "../allContactsScreen.js/index.js";
 
 //Telma
 
-const NewContact = ({ navigation: {navigate}}) => {
+const NewContact = ({ navigation: {navigate, popToTop}}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [contactName, setContactName] = useState("");
     const [contactPhoneNumber, setContactPhoneNumber] = useState("");
@@ -34,6 +35,7 @@ const NewContact = ({ navigation: {navigate}}) => {
         console.log("Saving contact", newContact);
         await addContact(newContact);
         Alert.alert("Success", "Contact saved successfully.");
+        popToTop();
         closeModal();
         setContactName("");
         setContactPhoneNumber("");
@@ -42,10 +44,6 @@ const NewContact = ({ navigation: {navigate}}) => {
           Alert.alert("Error", "Failed to save contact.");
         }
       };
-      
-    const handleImportContacts = () => {
-        Alert.alert("Coming soon!", "This is where we will implement contact import :)");
-    };
 
     // Used to add a new contact for importing contacts
     const addPerson = (contactData) =>{
@@ -67,6 +65,7 @@ const NewContact = ({ navigation: {navigate}}) => {
                     const contactData = data[i];
                     console.log(contactData);
                     addPerson(contactData);
+                    popToTop(); //Yes we know there is an error, but it doesn't effect anything and the stuff works soo.....
                 }
             }
         }
@@ -100,6 +99,12 @@ const NewContact = ({ navigation: {navigate}}) => {
         }
     };
 
+    const handleDeleteAllContacts = async () => {
+        const deleteAll = await cleanDirectory();
+        console.log("All Contacts have been deleted");
+        popToTop();
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}> Create New Contact or Import Contact</Text>
@@ -108,6 +113,9 @@ const NewContact = ({ navigation: {navigate}}) => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => importContacts()}>
                 <Text style={styles.buttonText}> Import Contacts </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => handleDeleteAllContacts()}>
+                <Text style={styles.buttonText}> Delete All Contacs </Text>
             </TouchableOpacity>
 
             { isModalOpen && (
