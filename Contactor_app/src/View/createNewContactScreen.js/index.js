@@ -63,7 +63,7 @@ const NewContact = ({ navigation: {navigate, popToTop}}) => {
                 for (let i = 0; i < data.length; i++) {
                     const contactData = data[i];
                     addPerson(contactData);
-                    popToTop(); //Yes we know there is an error, but it doesn't effect anything and the stuff works soo.....
+                    popToTop(); //This does produce a dev. warning but all works as it should.
                 }
             }
         }
@@ -72,7 +72,7 @@ const NewContact = ({ navigation: {navigate, popToTop}}) => {
     
 
     const handleSelectPhoto = async () => {
-        const permissionGranted = await getPermission("gallery");
+        const permissionGranted = await getPermission("CAMERA_ROLL");
         if (!permissionGranted) {
             Alert.alert("Permission Denied", "Enable permission in your phone settings to access the images in your gallery.");
             return;
@@ -85,7 +85,7 @@ const NewContact = ({ navigation: {navigate, popToTop}}) => {
     };
 
     const handleTakePhoto = async () => {
-        const permissionGranted = await getPermission("camera");
+        const permissionGranted = await getPermission("CAMERA");
         if (!permissionGranted) {
             Alert.alert("Permission Denied", "Enable permission in your phone settings to take a photo with your phone's camera.");
             return;
