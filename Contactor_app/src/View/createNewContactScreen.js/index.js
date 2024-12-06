@@ -48,12 +48,19 @@ const NewContact = ({ navigation: {navigate, popToTop}}) => {
     // Used to add a new contact for importing contacts
     const addPerson = (contactData) =>{
         const newId = contactData.id
-        console.log(contactData.firstName, contactData.id);
+        //console.log(contactData.firstName, contactData.id);
         const newName = contactData.firstName
-        const newNumber = contactData.phoneNumbers[0].number
-        const newImage = contactData.imageAvailable
-        const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
-        addContact(newPerson);
+        
+        if(contactData.phoneNumbers !== undefined){
+            const newNumber = contactData.phoneNumbers[0].number
+            let newImage = contactData.imageAvailable
+            if (contactData.imageAvailable === true){
+                newImage = contactData.image.uri
+            }
+            
+            const newPerson ={id: newId, name: newName, number: newNumber, image:newImage};
+            addContact(newPerson);
+        }
     }
 
     const importContacts = async () =>{
@@ -63,7 +70,6 @@ const NewContact = ({ navigation: {navigate, popToTop}}) => {
             if (data.length > 0) {
                 for (let i = 0; i < data.length; i++) {
                     const contactData = data[i];
-                    console.log(contactData);
                     addPerson(contactData);
                     popToTop(); //Yes we know there is an error, but it doesn't effect anything and the stuff works soo.....
                 }
