@@ -63,14 +63,24 @@ const ChosenContact = ({ route, navigation}) => {
                 <Text style = {styles.text}>Name: {currentContact.name}</Text>
                 <Text style = {styles.text}>phone number:{currentContact.number}</Text>
             </View>
-
-            <Button title="Remove" onPress={async () => {
-                    await remove(currentContact);
-                    Alert.alert("Contact Removed", `${currentContact.name} has been successfully removed.`);
-                    navigation.goBack(); }}/>
-            <Button title="Edit Profile" onPress={toggleEditModal} style={styles.editButton} />
+            <View style={styles.editButton}>
+                <Button title="Remove" onPress={async () => {
+                        await remove(currentContact);
+                        Alert.alert("Contact Removed", `${currentContact.name} has been successfully removed.`);
+                        navigation.goBack(); }}
+                        color={"white"}
+                        />
+            </View>
+            <View style={styles.editButton}>
+                <Button title="Edit Profile" onPress={toggleEditModal}
+                    color={"white"}
+                />
+            </View>
+            
             <EditContactModal visible={isEditModalVisible} onClose={toggleEditModal} contact={currentContact} onSave={(updatedContact) => {editContact(updatedContact); toggleEditModal();}} />
-            <Button title="Call Contact" onPress={makeCall} />
+            <View style={styles.editButton}>
+            <Button color={"white"} title="Call Contact" onPress={makeCall}  />
+            </View>
         </View>
     )
 };
