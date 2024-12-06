@@ -31,6 +31,7 @@ const AddContactModal = ({
             <TextInput
                 style={styles.input}
                 placeholder="Contact Phone Number"
+                keyboardType="phone-pad"
                 placeholderTextColor={"darkblue"}
                 value={contactPhoneNumber}
                 onChangeText={setContactPhoneNumber}

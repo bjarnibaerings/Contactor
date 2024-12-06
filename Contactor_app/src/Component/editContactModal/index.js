@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { View, Text, Modal, Button, TextInput, StyleSheet } from "react-native";
+import { View, Text, Modal, Button, TextInput, Image } from "react-native";
 import styles from "./styles"
 
 
@@ -22,7 +22,6 @@ const EditContactModal = ({ visible, onClose, contact, onSave }) => {
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text style={styles.title}>Edit Contact</Text>
-
                     <TextInput placeholder={contact.name} style={styles.input} value={name} onChangeText={setName} />
                     <TextInput placeholder={contact.number} style={styles.input} keyboardType="phone-pad" value={phoneNumber} onChangeText={setPhoneNumber}/>
                     <Button title="Save" onPress={handleSave}></Button>
