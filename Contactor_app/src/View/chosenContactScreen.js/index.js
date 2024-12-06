@@ -45,7 +45,7 @@ const ChosenContact = ({ route, navigation}) => {
         
     }
     
-    // *** Added function for making a call ***
+    // make call
     const makeCall = () => {
         const phoneNumber = `tel:${currentContact.number}`;
         Linking.openURL(phoneNumber);
